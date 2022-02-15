@@ -2,6 +2,7 @@ import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import './widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +15,14 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         fontFamily: 'Quicksand',
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('es', ''),
+      ],
       home: MyHomePage(),
     );
   }
@@ -43,11 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _addNewTrx(
     String title,
     double amount,
+    DateTime chosenDate,
   ) {
     final newTx = Transaction(
       title: title,
       money: amount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
@@ -67,6 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
+  }
+
+  void _deleteTrax(String id) {
+    setState(() {
+      _userTrx.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -109,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(10),
             color: Theme.of(context).primaryColorDark,
           ),
-          TransactionList(_userTrx),
+          TransactionList(_userTrx, _deleteTrax),
         ],
       ),
       floatingActionButtonLocation:
