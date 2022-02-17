@@ -97,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.add_link_rounded),
+            icon: Icon(Icons.add_box_rounded),
             onPressed: () => _startAddNewTrx(context),
           ),
         ],
@@ -131,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.account_tree_sharp),
+        child: Icon(Icons.add),
         onPressed: () => _startAddNewTrx(context),
       ),
     );
